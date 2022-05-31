@@ -1,1 +1,1 @@
-My name is Betty task
+Shell, init files, variables and expansions
