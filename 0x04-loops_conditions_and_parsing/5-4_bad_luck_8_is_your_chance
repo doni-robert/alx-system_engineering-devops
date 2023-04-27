@@ -3,7 +3,7 @@
 # 4th iteration, "good luck" for the 8th iteration and "Best School" for the other # iterations
 
 i=0
-while (( $i < 10 ))
+while (( i < 10 ))
 do
         if [ $i -eq 3 ]
         then

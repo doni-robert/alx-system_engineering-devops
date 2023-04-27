@@ -5,7 +5,7 @@
 # "17" and then "bad luck from Italy" for the 17th iteration
 
 i=1
-while (( $i < 21 ))
+while (( i < 21 ))
 do
    case $i in
 	   4)
