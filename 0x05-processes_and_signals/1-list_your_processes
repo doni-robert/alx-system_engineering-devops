@@ -3,4 +3,4 @@
 # those which might not have a TTY, displays in a user-orinted format and shows
 # process hierachy
 
-ps -u
+ps -auxf
