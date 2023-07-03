@@ -1,4 +1,4 @@
-#!/usr/bin/env/ bash
+#!/usr/bin/env bash
 # Configures a server with HA Proxy and the following requirements
 
 sudo apt-get update
