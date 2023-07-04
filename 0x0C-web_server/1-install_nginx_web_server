@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
-# Configures a new Ubuntu machine to:
-#	Install nginx
-#	nginx should be listening to port 80
-#	returns a string 'Hello World!' when nginx is queried at its root
-
+# Installs nginx server
 apt-get update
-apt-get install nginx
+apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /var/www/html/index.html
-service nginx restart
+echo "Hello World!" > /var/www/html/index.html
+service nginx start
