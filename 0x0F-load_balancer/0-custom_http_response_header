@@ -1,30 +1,31 @@
 #!/usr/bin/env bash
 #Configure your Nginx server to below requirements
 
-sudo apt-get update
-sudo apt-get install -y nginx
+apt-get update
+apt-get install -y nginx
 
-# configure firewall to allow request through port 80
-sudo ufw allow 'Nginx HTTP'
+mkdir -p /var/www/html
+touch /var/www/html/index.html
+echo "Hello World" > /var/www/html/index.html
+touch /var/www/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-sudo mkdir -p /var/www/html
+printf %s "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
 
-# change permissions to allow us to easily create files in this directory
-sudo chmod -R 755 /var/www
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
 
-# code to redirect a specific endpoint 
-echo "Hello World!" | sudo tee /var/www/html/index.html
-string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
 
-# code to create error page and add a redirect for error 404
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
-
-# Configure a response header containing a custom header
-replacer="server_name $HOSTNAME;\n\tadd_header X-Served-By $HOSTNAME;"
-sudo sed -i "s/server_name _;/$replacer/" /etc/nginx/sites-enabled/default
-
-# restart the server
-sudo service nginx restart
+service nginx restart
