@@ -1,0 +1,6 @@
+# Blocks all incoming traffic except ports 22, 443 and 80
+sudo apt-get update
+sudo apt-get install ufw
+sudo ufw default deny incoming
+sudo ufw allow 22,443,80/tcp
+sudo ufw enable
