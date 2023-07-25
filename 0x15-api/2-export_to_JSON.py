@@ -11,7 +11,7 @@ import sys
 if __name__ == "__main__":
     num = int(sys.argv[1])
     url = 'https://jsonplaceholder.typicode.com/users/{}'.format(num)
-    username = requests.get(url).json().get('name')
+    username = requests.get(url).json().get('username')
 
     todo = requests.get(url + '/todos/')
 

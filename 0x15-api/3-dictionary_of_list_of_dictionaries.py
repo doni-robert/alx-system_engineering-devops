@@ -13,7 +13,7 @@ if __name__ == "__main__":
                         'https://jsonplaceholder.typicode.com/users/').json())
     for num in range(1, num_users + 1):
         url = 'https://jsonplaceholder.typicode.com/users/{}'.format(num)
-        username = requests.get(url).json().get('name')
+        username = requests.get(url).json().get('username')
 
         todo = requests.get(url + '/todos/')
 
