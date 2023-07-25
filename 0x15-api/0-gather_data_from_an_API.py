@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     total += complete
 
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
                                                     username, complete, total))
     for data in done_list:
         print("\t {}".format(data))
